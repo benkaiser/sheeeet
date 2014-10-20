@@ -4,8 +4,7 @@
 
 {% block content %}
 <div class="container">
-  <h1>Welcome to Sheeeet.</h1>
-
+  <div id="contentContainer"></div>
 </div>
 {% endblock %}
 {% block scripts %}
@@ -15,10 +14,22 @@
     "/static/js/libs/backbone-min.js",
     "/static/js/libs/backbone.marionette.min.js",
     "/static/js/libs/swig.min.js",
+    "/socket.io/socket.io.js",
     "/static/js/app.js"
     );
 </script>
 {# swig templates #}
 {% raw %}
+<script type="text/swig" id="home_view">
+<div>
+  <h1>Projects</h1>
+  {% if projects.length == 0 %}
+  <p>
+  Start using Sheeeet by creating a new project to add work to.
+  </p>
+  {% endif %}
+  <div class="btn btn-primary">Create New Project</div>
+</div>
+</script>
 {% endraw %}
 {% endblock %}

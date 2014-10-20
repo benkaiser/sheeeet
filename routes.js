@@ -6,9 +6,16 @@ module.exports = function(app, io){
   app.get("/", homeRoute);
 
   // socket connections
-  io.on('connection', function(socket){
-    // emit the inital page data
-    socket.emit('page_data', {});
+  io.on("connection", function(socket){
+    // send back the basic data when app is connected
+    socket.on("app_connected", function(){
+      // fetch all data
+      app.db.projects.find({}, function(err, projects){
+        app.db.work.find({}, function(err, work){
+          socket.emit("data", {projects: projects, work: work});
+        });
+      });
+    });
   });
 };
 

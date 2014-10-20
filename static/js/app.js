@@ -1,53 +1,65 @@
+// init socket connection
+var socket = io.connect("http://"+window.location.host);
+
 // utility functions
 function render(template, data){
   return swig.render($(template).html(), {locals: data});
 }
+
+// collections
+var ProjectCollection = Backbone.Collection.extend({});
+var WorkCollection = Backbone.Collection.extend({});
+// instances of the collections
+var projects = new ProjectCollection();
+var work = new WorkCollection();
+
+// socket.io actions
+socket.on("connect", function(){
+  socket.emit("app_connected");
+});
+socket.on("data", function(data){
+
+  // only start the routing when the data is loaded
+  if(!Backbone.History.started){
+    Backbone.history.start({pushState: false});
+  }
+});
 
 // setup the backbone app and router
 App = new Backbone.Marionette.Application();
 
 // set the regions on the page
 App.addRegions({
-  surveyRegion: "#surveyContainer",
+  contentRegion: "#contentContainer",
 });
 
 var Router = Backbone.Router.extend({
   cv: null, // content view
   routes: {
-    '': 'home',
+    "": "home",
     "home": "home",
   },
   home: function(id){
+    console.log("Home");
     this.cv = new HomeView({});
-    if(this.pv) this.pv.show();
-    WyltApp.contentRegion.show(this.cv);
-    this.track('home', '/home');
+    App.contentRegion.show(this.cv);
   }
 });
 
 
 var sections;
 App.addInitializer(function(options) {
-  // load the survey view
-  this.cv = new SurveyView({});
-  App.surveyRegion.show(this.cv);
+  this.router = new Router();
 });
 
-var SurveyView = Backbone.View.extend({
-  template: "#survey_template",
-  end_template: "#end_template",
-  save_template: "#save_template",
-  events: {
-    "click #next": "nextSection",
-    "click #prev": "prevSection"
-  },
+var HomeView = Backbone.View.extend({
+  template: "#home_view",
+  events: {},
   initialize: function() {
-    // initialise survey
-    this.count = 0;
-    this.current_fields = [];
+
   },
   render: function() {
-
+    this.$el.html(render(this.template, {projects: projects.where({})}));
   }
 });
 
