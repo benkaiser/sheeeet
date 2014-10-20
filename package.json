@@ -1,0 +1,16 @@
+{
+  "name": "sheeet",
+  "description": "Timesheet management web app - written in node.js",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body-parser": "1.x",
+    "cookie-parser": "1.x",
+    "express": "4.x",
+    "express-session": "1.x",
+    "mkdirp": "^0.5.0",
+    "nedb": "^0.11.1",
+    "socket.io": "1.x",
+    "swig": "1.x"
+  }
+}

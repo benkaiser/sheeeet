@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{% block title %}Sheeet{% endblock %}</title>
+
+  <script type="text/javascript" src="/static/js/libs/head.load.min.js"></script>
+
+  <script type="text/javascript">
+  head.load(
+    "/static/css/libs/bootstrap.min.css",
+    "/static/css/public.css"
+    );
+  </script>
+  {% block head %}
+  {% endblock %}
+</head>
+<body>
+  <nav class="navbar navbar-default container no_bottom_margin" role="navigation">
+    <a class="navbar-brand" href="#">Sheeeet</a>
+    {%block navbar %}
+    {% endblock %}
+  </nav>
+  {% block content %}
+  {% endblock %}
+  <script type="text/javascript">
+    head.js(
+      "/static/js/libs/jquery.min.js",
+      "/static/js/libs/bootstrap.min.js"
+      );
+  </script>
+  {% block scripts %}
+  {% endblock %}
+</body>
+</html>
