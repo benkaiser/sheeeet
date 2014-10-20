@@ -8,3 +8,17 @@
 
 </div>
 {% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+  head.js(
+    "/static/js/libs/underscore-min.js",
+    "/static/js/libs/backbone-min.js",
+    "/static/js/libs/backbone.marionette.min.js",
+    "/static/js/libs/swig.min.js",
+    "/static/js/app.js"
+    );
+</script>
+{# swig templates #}
+{% raw %}
+{% endraw %}
+{% endblock %}
