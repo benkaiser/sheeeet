@@ -1,6 +1,6 @@
 {% extends 'base/main_base.html' %}
 
-{% block title %}Sheet - Timesheet Management{% endblock %}
+{% block title %}Sheeeet - Timesheet Management{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -28,7 +28,49 @@
   Start using Sheeeet by creating a new project to add work to.
   </p>
   {% endif %}
-  <div class="btn btn-primary">Create New Project</div>
+  <a class="btn btn-primary" href="#projects/create">Create New Project</a>
+</div>
+</script>
+<script type="text/swig" id="create_project_view">
+<div class="form form-horizontal">
+  <h1>Create Project</h1>
+
+  <div class="form-group">
+    <label for="textArea" class="col-lg-2 control-label">Title</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="title">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="textArea" class="col-lg-2 control-label">Contact Name</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="contact_name">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="textArea" class="col-lg-2 control-label">Rate</label>
+    <div class="col-lg-10">
+      <div class="input-group">
+        <span class="input-group-addon">$/h</span>
+        <input type="number" class="form-control" id="rate">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="textArea" class="col-lg-2 control-label">Description</label>
+    <div class="col-lg-10">
+      <textarea class="form-control" id="description"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-10 col-offset-2">
+      <div class="btn btn-primary">Create</div>
+    </div>
+  </div>
 </div>
 </script>
 {% endraw %}

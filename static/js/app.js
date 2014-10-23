@@ -38,10 +38,15 @@ var Router = Backbone.Router.extend({
   routes: {
     "": "home",
     "home": "home",
+    "projects/create": "create"
   },
   home: function(id){
     console.log("Home");
     this.cv = new HomeView({});
+    App.contentRegion.show(this.cv);
+  },
+  create: function(){
+    this.cv = new CreatProjectView({});
     App.contentRegion.show(this.cv);
   }
 });
@@ -54,6 +59,17 @@ App.addInitializer(function(options) {
 
 var HomeView = Backbone.View.extend({
   template: "#home_view",
+  events: {},
+  initialize: function() {
+
+  },
+  render: function() {
+    this.$el.html(render(this.template, {projects: projects.where({})}));
+  }
+});
+
+var CreatProjectView = Backbone.View.extend({
+  template: "#create_project_view",
   events: {},
   initialize: function() {
 
