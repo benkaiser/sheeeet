@@ -28,7 +28,34 @@
   Start using Sheeeet by creating a new project to add work to.
   </p>
   {% endif %}
-  <a class="btn btn-primary" href="#projects/create">Create New Project</a>
+  <p>
+    <a class="btn btn-primary" href="#projects/create">Create New Project</a>
+  </p>
+  {% if projects.length > 0 %}
+  <table class="table">
+    <tr><th>Project Name</th><th>View</th><th>Actions<th></tr>
+    {% for project in projects %}
+    <tr>
+      <td>{{project.attributes.title}}</td>
+      <td><a class="btn btn-primary view" href="#projects/view/{{project.attributes._id}}">View</a></td>
+      <td>
+        <div class="btn-group">
+          <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            Actions
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="edit" data-id="{{project.attributes._id}}">Edit</a></li>
+            <li><a href="#" class="archive" data-id="{{project.attributes._id}}">Archive</a></li>
+            <li class="divider"></li>
+            <li><a href="#" class="delete" data-id="{{project.attributes._id}}">Delete</a></li>
+           </ul>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
 </div>
 </script>
 <script type="text/swig" id="create_project_view">
@@ -68,7 +95,27 @@
 
   <div class="form-group">
     <div class="col-lg-10 col-offset-2">
-      <div class="btn btn-primary">Create</div>
+      <div class="btn btn-primary create">Create</div>
+    </div>
+  </div>
+</div>
+</script>
+<script type="text/swig" id="project_view">
+<div class="form form-horizontal">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Project {{project.attributes.title}}</h1>
+      <div class="well">
+        {{project.attributes.description}}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h1>Work Timer</h1>
+      <div class="btn btn-success start">Start</div>
+      <div class="btn btn-warning hide pause">Take Break</div>
+      <div class="btn btn-success hide resume">Resume</div>
+      <div class="btn btn-danger hide stop">Stop</div>
+      <p id="timer"></p>
     </div>
   </div>
 </div>

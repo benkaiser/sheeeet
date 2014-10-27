@@ -16,6 +16,20 @@ module.exports = function(app, io){
         });
       });
     });
+    // creating a new project
+    socket.on("create_project", function(data){
+      app.db.projects.insert(data, function(err, doc){
+        socket.emit("new_project", doc);
+      });
+    });
+    // archive project
+    socket.on("archive_project", function(data){
+      app.db.projects.update({_id: data._id}, {$set: {archived: true}});
+    });
+    // delete project
+    socket.on("delete_project", function(data){
+      app.db.projects.remove({_id: data._id});
+    });
   });
 };
 
