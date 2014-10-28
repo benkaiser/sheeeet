@@ -30,6 +30,12 @@ module.exports = function(app, io){
     socket.on("delete_project", function(data){
       app.db.projects.remove({_id: data._id});
     });
+    // add work item
+    socket.on("add_work", function(data){
+      app.db.work.insert(data, function(err, doc){
+        socket.emit("new_work", doc);
+      });
+    });
   });
 };
 
