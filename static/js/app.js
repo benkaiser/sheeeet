@@ -7,7 +7,6 @@ function render(template, data){
 }
 
 function secondsToTime(secs){
-  console.log(secs);
   secs = Math.round(secs);
   var hours = Math.floor(secs / (60 * 60));
   var divisor_for_minutes = secs % (60 * 60);
@@ -90,7 +89,6 @@ var Router = Backbone.Router.extend({
     "projects/view/:id": "view"
   },
   home: function(){
-    console.log("Home");
     this.cv = new HomeView({});
     App.contentRegion.show(this.cv);
   },
@@ -156,7 +154,8 @@ var ProjectView = Backbone.View.extend({
     "click .pause,.resume": "pause",
     "click .stop": "stop"
   },
-  initialize: function() {
+  initialize: function(options) {
+    this.options = options || {};
     this.options.project = projects.findWhere({_id: this.options.id});
     this.options.breaks = [];
   },
@@ -237,7 +236,7 @@ var ProjectView = Backbone.View.extend({
   updateTime: function(){
     if(!this.options.is_paused){
       var now = +new Date();
-      var time = secondsToTime(this.calculateTotalTime() / 1000);
+      var time = this.calculateTotalTime() / 1000;
       $("#timer").html(formatTime(time));
     }
   }

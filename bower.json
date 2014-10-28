@@ -45,7 +45,7 @@
       "civswig": "bower_components/civswig/swig.min.js",
       "headjs": "bower_components/headjs/dist/1.0.0/head.load.min.js",
       "jquery": "bower_components/jquery/dist/jquery.min.js",
-      "marionette": "bower_components/marionette/lib/core/backbone.marionette.min.js",
+      "marionette": "bower_components/marionette/lib/backbone.marionette.min.js",
       "messenger": [
         "bower_components/messenger/build/css/messenger-theme-air.css",
         "bower_components/messenger/build/js/messenger.min.js"
