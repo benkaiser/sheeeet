@@ -19,8 +19,8 @@
   "dependencies": {
     "backbone": "~1.1.2",
     "bootbox": "~4.3.0",
-    "bootstrap": "~3.2.0",
-    "bootswatch": "v3.2.0+4",
+    "bootstrap": "~3.3.0",
+    "bootswatch": "v3.3.0",
     "headjs": "~1.0.3",
     "jquery": "~2.1.1",
     "marionette": "~2.2.2",

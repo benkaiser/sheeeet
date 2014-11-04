@@ -4,12 +4,13 @@ This project aims to be an easy to use, open source, timesheet management applic
 
 #### Installation Instructions
 
-dependencies: [node](http://nodejs.org/), [git](http://git-scm.com/)
+dependencies: [node](http://nodejs.org/), [git](http://git-scm.com/), [bower-installer](https://www.npmjs.org/package/bower-installer)
 
 ```
 git clone https://github.com/benkaiser/sheeeet.git
 cd sheeeet
 npm install
+bower-installer
 node app.js
 ```
 
