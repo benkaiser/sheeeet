@@ -14,6 +14,7 @@
     "/static/js/libs/backbone/backbone.js",
     "/static/js/libs/marionette/backbone.marionette.min.js",
     "/static/js/libs/civswig/swig.min.js",
+    "/static/js/libs/bootbox/bootbox.js",
     "/socket.io/socket.io.js",
     "/static/js/app.js"
     );
@@ -111,7 +112,8 @@
       <h3>Work History</h3>
       {% for work_item in work %}
       <div class="work_item well well-sm">
-        Duration: {{(work_item.attributes.duration/1000)|formatTime}}
+        Duration: {{(work_item.attributes.duration/1000)|formatTime}}<br/>
+        Worked on: {{work_item.attributes.worked_on}}
       </div>
       {% endfor %}
     </div>

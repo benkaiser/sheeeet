@@ -192,6 +192,9 @@ var ProjectView = Backbone.View.extend({
     this.options.is_paused = !this.options.is_paused;
   },
   stop: function(){
+    // keep reference for use inside callbacks
+    var proj_view = this;
+    // unpause if paused
     if(this.options.is_paused){
       this.pause();
     }
@@ -202,19 +205,23 @@ var ProjectView = Backbone.View.extend({
     // clear interval
     clearInterval(this.options.interval);
     $("#timer").html(this.timer_placeholder);
-    // send the data back to the server
     var now = +new Date();
-    var work_item = {
-      project: this.options.id,
-      start: this.options.start_time,
-      end: now,
-      duration: this.calculateTotalTime(),
-      breaks: this.options.breaks
-    };
-    // save to server
-    socket.emit("add_work", work_item);
-    // clear the data
-    this.options.breaks = [];
+    // fetch what they worked on
+    bootbox.prompt("What did you work on?", function(response){
+      // send the data back to the server
+      var work_item = {
+        project: proj_view.options.id,
+        start: proj_view.options.start_time,
+        end: now,
+        duration: proj_view.calculateTotalTime(),
+        breaks: proj_view.options.breaks,
+        worked_on: response || ""
+      };
+      // save to server
+      socket.emit("add_work", work_item);
+      // clear the data
+      proj_view.options.breaks = [];
+    });
   },
   // factor in breaks, and work out the total time worked
   calculateTotalTime: function(){
